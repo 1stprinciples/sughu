@@ -294,9 +294,20 @@
 
     /* ── Responsive ── */
     @media (max-width: 480px) {
-      .wrap { padding: 56px 20px 60vh; }
+      .wrap {
+        padding: 48px 20px 60vh;
+        perspective: none;
+      }
       .name { font-size: 1.75rem; }
       .project-tag { display: none; }
+      .bio { margin-top: 40px; }
+      .article-list a {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .article-date {
+        white-space: normal;
+      }
     }
 
     /* ── Reduce motion ── */
@@ -398,15 +409,17 @@
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const reveals = document.querySelectorAll('.reveal');
       const hero = document.querySelector('.hero-zoom');
-      const heroMaxScale = 1.35;
-      const heroMinScale = 0.85;
+      const isMobile = window.innerWidth <= 480;
+      const heroMaxScale = isMobile ? 1.0 : 1.35;
+      const heroMinScale = isMobile ? 0.92 : 0.85;
       const heroScrollRange = 350;
       const lerp = (a, b, t) => a + (b - a) * t;
       const smoothing = 0.22; // higher = snappier response
 
       // Current animated values (for lerp)
+      const foldAngle = isMobile ? 20 : 55;
       let currentHeroScale = heroMaxScale;
-      const currentVals = Array.from(reveals, () => ({ angle: 55, scale: 0.88, opacity: 0 }));
+      const currentVals = Array.from(reveals, () => ({ angle: foldAngle, scale: 0.88, opacity: 0 }));
 
       function tick() {
         const viewH = window.innerHeight;
@@ -443,13 +456,13 @@
             targetScale = 1;
             targetOpacity = 1;
           } else if (dist >= range) {
-            targetAngle = 55;
+            targetAngle = foldAngle;
             targetScale = 0.88;
             targetOpacity = 0;
           } else {
             const t = 1 - dist / range;
             const eased = t * t;
-            targetAngle = 55 * (1 - eased);
+            targetAngle = foldAngle * (1 - eased);
             targetScale = 0.88 + 0.12 * eased;
             targetOpacity = eased;
           }
