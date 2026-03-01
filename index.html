@@ -41,9 +41,9 @@
     }
 
     .wrap {
-      max-width: 600px;
+      max-width: 680px;
       margin: 0 auto;
-      padding: 88px 28px 60vh;
+      padding: 88px 32px 60vh;
       perspective: 1200px;
     }
 
@@ -295,7 +295,7 @@
     /* ── Responsive ── */
     @media (max-width: 480px) {
       .wrap {
-        padding: 48px 20px 60vh;
+        padding: 48px 24px 60vh;
         perspective: none;
       }
       .name { font-size: 1.75rem; }
@@ -356,10 +356,19 @@
       <p class="label">things i'm building</p>
       <ul class="project-list">
         <li>
+          <a href="https://jobofbuilding.xyz" target="_blank" rel="noreferrer noopener">
+            <div class="project-row">
+              <span class="project-title">job of building</span>
+              <span class="project-tag active">building now</span>
+            </div>
+            <p class="project-desc">a space for people who build things.</p>
+          </a>
+        </li>
+        <li>
           <a href="https://github.com/1stprinciples/fde-sidekick" target="_blank" rel="noreferrer noopener">
             <div class="project-row">
               <span class="project-title">fde sidekick</span>
-              <span class="project-tag active">building now</span>
+              <span class="project-tag">building now</span>
             </div>
             <p class="project-desc">voice-first copilot for hackathons and brainstorming sessions. speak, and it generates a structured summary, an architecture diagram, and a task list in real time. built with react, whisper, and mermaid.</p>
           </a>
@@ -410,7 +419,7 @@
       const reveals = document.querySelectorAll('.reveal');
       const hero = document.querySelector('.hero-zoom');
       const isMobile = window.innerWidth <= 480;
-      const heroMaxScale = isMobile ? 1.0 : 1.35;
+      const heroMaxScale = isMobile ? 1.0 : 1.15;
       const heroMinScale = isMobile ? 0.92 : 0.85;
       const heroScrollRange = 350;
       const lerp = (a, b, t) => a + (b - a) * t;
